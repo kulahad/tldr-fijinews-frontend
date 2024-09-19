@@ -14,6 +14,7 @@ export default function news({
   title,
   summary,
   article_url,
+  publish_time,
   // image_url,
   source,
 }: News) {
@@ -26,6 +27,9 @@ export default function news({
             <AvatarImage src={`/${source}.jpg`} />
           </Avatar>
           <CardDescription className="ml-2">{source}</CardDescription>
+          <CardDescription className="ml-2 font-thin text-sm">
+            {publish_time}
+          </CardDescription>
         </div>
       </CardHeader>
       <CardContent>
