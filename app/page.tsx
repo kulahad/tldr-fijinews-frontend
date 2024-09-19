@@ -18,9 +18,8 @@ export default function Home() {
   };
 
   useEffect(() => {
-    console.log("Process: ", process.env.NEXT_PUBLIC_NEWS_API);
     fetchNewsFromAPI();
-  }, [articles]);
+  }, []);
 
   return (
     <main className="flex flex-col">
@@ -33,7 +32,9 @@ export default function Home() {
       <Suspense fallback={<div className="m-auto">Loading...</div>}>
         <div className="flex flex-col justify-evenly mx-8">
           {articles &&
-            articles.map((article, id) => <News key={id} {...article} />)}
+            articles
+              .sort((a, b) => a.publish_time.localeCompare(b.publish_time))
+              .map((article, id) => <News key={id} {...article} />)}
         </div>
       </Suspense>
     </main>
