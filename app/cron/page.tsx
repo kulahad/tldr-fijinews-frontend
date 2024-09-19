@@ -1,15 +1,26 @@
-import React from "react";
+"use client";
 
-async function page() {
-  const data = await fetch("https://tldr-fijinews-api.onrender.com/grabnews", {
-    method: "Post",
-  });
-  const trigger: { message: string } = await data.json();
-  console.log(trigger);
+import React, { useEffect, useState } from "react";
+
+function page() {
+  const [trigger, setTrigger] = useState<{ message: string } | null>();
+
+  const fetchdata = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_NEWS_API}/grabnews`, {
+      method: "Post",
+    });
+
+    const data = await res.json();
+    setTrigger(data);
+  };
+
+  useEffect(() => {
+    fetchdata();
+  }, []);
 
   return (
-    <div className="flex m-6 w-screen h-screen justify-center items-center text-3xl font-extrabold text-red-400">
-      Scrapping triggered! - {trigger.message}
+    <div className="flex m-6 h-screen justify-center items-center text-3xl font-extrabold text-red-400">
+      Scrapping triggered! - {trigger?.message}
     </div>
   );
 }
