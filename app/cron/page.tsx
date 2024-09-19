@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 
-function page() {
+function Home() {
   const [trigger, setTrigger] = useState<{ message: string } | null>();
 
   const fetchdata = async () => {
@@ -25,4 +25,4 @@ function page() {
   );
 }
 
-export default page;
+export default Home;
